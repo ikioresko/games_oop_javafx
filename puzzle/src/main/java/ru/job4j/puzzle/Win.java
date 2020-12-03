@@ -2,7 +2,39 @@ package ru.job4j.puzzle;
 
 public class Win {
     public static boolean check(int[][] board) {
+        boolean rsl = false;
+        int num = 0;
+        for (int y = 0; y < board.length; y++) {
+            if (board[y][y] == 1) {
+                num = y;
+                if ((rowCheck(board, num) || columnCheck(board, num))) { // когда одна из проверок true игра выигрышная
+                    rsl = true;
+                    break;
+                } break; // поставил стоп чтобы когда проверка дает отрицательный результат, не входить заново в цикл
+            }
+        }
+        return rsl;
+    }
+
+    public static boolean rowCheck(int[][] board, int num) {
         boolean rsl = true;
+        for (int x = 0; x < board.length; x++) {
+            if (board[num][x] != 1) {//проверяет всю ось x на наличие 1
+                rsl = false;
+                break;
+            }
+        }
+        return rsl;
+    }
+
+    public static boolean columnCheck(int[][] board, int num) {
+        boolean rsl = true;
+        for (int x = 0; x < board.length; x++) {
+            if (board[x][num] != 1) {//проверяет всю ось y на наличие 1
+                rsl = false;
+                break;
+            }
+        }
         return rsl;
     }
 }
