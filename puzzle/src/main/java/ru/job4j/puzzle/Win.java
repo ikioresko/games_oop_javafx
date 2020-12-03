@@ -3,14 +3,12 @@ package ru.job4j.puzzle;
 public class Win {
     public static boolean check(int[][] board) {
         boolean rsl = false;
-        int num = 0;
         for (int y = 0; y < board.length; y++) {
             if (board[y][y] == 1) {
-                num = y;
-                if ((rowCheck(board, num) || columnCheck(board, num))) { // когда одна из проверок true игра выигрышная
+                if ((rowCheck(board, y) || columnCheck(board, y))) { // когда одна из проверок true игра выигрышная
                     rsl = true;
                     break;
-                } break; // поставил стоп чтобы когда проверка дает отрицательный результат, не входить заново в цикл
+                }
             }
         }
         return rsl;
