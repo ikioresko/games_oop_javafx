@@ -73,6 +73,37 @@ public class LogicTest {
     }
 
     @Test
+    public void moveWhenFigureNotFoundException()
+            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        expectedEx.expect(FigureNotFoundException.class);
+        expectedEx.expectMessage("Figure not found");
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C1));
+        logic.move(Cell.C3, Cell.G5);
+    }
+
+    @Test
+    public void moveWhenOccupiedCellException()
+            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        expectedEx.expect(OccupiedCellException.class);
+        expectedEx.expectMessage("Cell is busy");
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C1));
+        logic.add(new BishopBlack(Cell.D2));
+        logic.move(Cell.C1, Cell.D2);
+    }
+
+    @Test
+    public void moveWhenImpossibleMoveException()
+            throws FigureNotFoundException, OccupiedCellException, ImpossibleMoveException {
+        expectedEx.expect(ImpossibleMoveException.class);
+        expectedEx.expectMessage("Could not move by diagonal from C1 to C3");
+        Logic logic = new Logic();
+        logic.add(new BishopBlack(Cell.C1));
+        logic.move(Cell.C1, Cell.C3);
+    }
+
+    @Test
     public void whenIsDiagonal() {
         Logic logic = new Logic();
         BishopBlack bb = new BishopBlack(Cell.C1);
